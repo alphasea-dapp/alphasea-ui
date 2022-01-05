@@ -2,39 +2,36 @@ import type { AppProps } from 'next/app'
 import { QUERY_TOURNAMENTS } from '../src/graphql/queries/tournaments';
 import { QUERY_MODELS } from '../src/graphql/queries/models';
 import { DataGrid } from '@mui/x-data-grid';
+import TextField  from '@mui/material/TextField';
+import _ from 'lodash';
 
 import {
     useQuery,
-    gql
 } from "@apollo/client";
 
 function getColumns(list: Array<Object>) {
     if (list) {
-        const columns = [];
-        for (let key in list[0]) {
-            columns.push({ field: key, headerName: key });
-        }
-        return columns
+        return _.map(list[0], (v: Any, k: string) => {
+            return { field: k, headerName: k }
+        })
     } else {
         return []
     }
 }
 
 function Debug({ Component, pageProps }: AppProps) {
-    let tournaments;
-    {
-        const {loading, error, data} = useQuery(QUERY_TOURNAMENTS);
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error: {JSON.stringify(error)}</p>;
-        tournaments = data.tournaments;
-    }
+    const queryTournamentsResult = useQuery(QUERY_TOURNAMENTS);
+    const queryModelsResult = useQuery(QUERY_MODELS);
 
-    let models;
     {
-        const {loading, error, data} = useQuery(QUERY_MODELS);
+        const { loading, error } = queryTournamentsResult;
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error: {JSON.stringify(error)}</p>;
-        models = data.models;
+    }
+    {
+        const { loading, error } = queryModelsResult;
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error: {JSON.stringify(error)}</p>;
     }
 
     const graphqlEndpoint = process.env.NEXT_PUBLIC_ALPHASEA_THEGRAPH_ENDPOINT;
@@ -46,24 +43,34 @@ function Debug({ Component, pageProps }: AppProps) {
             <h2>Tournament</h2>
             <div style={{ height: 200 }}>
                 <DataGrid
-                    rows={tournaments}
-                    columns={getColumns(tournaments)}
+                    rows={queryTournamentsResult.data.tournaments}
+                    columns={getColumns(queryTournamentsResult.data.tournaments)}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
             </div>
-            {JSON.stringify(tournaments)}
+            <TextField
+                multiline
+                value={JSON.stringify(queryTournamentsResult.data)}
+                maxRows={4}
+                style={{ width: '100%' }}
+            />
 
             <h2>Model</h2>
             <div style={{ height: 200 }}>
                 <DataGrid
-                    rows={models}
-                    columns={getColumns(models)}
+                    rows={queryModelsResult.data.models}
+                    columns={getColumns(queryModelsResult.data.models)}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                 />
             </div>
-            {JSON.stringify(models)}
+            <TextField
+                multiline
+                value={JSON.stringify(queryModelsResult.data)}
+                maxRows={4}
+                style={{ width: '100%' }}
+            />
 
             <h2>Prediction</h2>
 

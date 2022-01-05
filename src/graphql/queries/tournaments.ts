@@ -4,8 +4,15 @@ export const QUERY_TOURNAMENTS = gql`
   query queryTournaments {
       tournaments {
         id
-        description
+        executionStartAt
+        predictionTime
+        purchaseTime
+        shippingTime
+        executionPreparationTime
         executionTime
+        publicationTime
+        description
+        createdAt
       }
   }
 `;

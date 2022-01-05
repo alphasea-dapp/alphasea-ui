@@ -2,60 +2,59 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { DataGrid } from '@mui/x-data-grid';
+import { QUERY_MODELS } from '../src/graphql/queries/models';
+import {useQuery} from "@apollo/client";
+import _ from 'lodash';
 
 const Home: NextPage = () => {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>AlphaSea App</title>
-        <meta name="description" content="AlphaSea is a decentralized marketplace for market alphas." />
-      </Head>
+    const queryModelsResult = useQuery(QUERY_MODELS);
+    {
+        const { loading, error } = queryModelsResult;
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error: {JSON.stringify(error)}</p>;
+    }
+    const models = _.sortBy(queryModelsResult.data.models, (model) => {
+        return -model.totalEarnings
+    })
+    _.each(models, (model, i) => {
+        model['rank'] = i
+    })
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+    const leaderboardColumns = [
+        { 'field': 'rank', 'headerName': 'Rank', 'width': 150 },
+        { 'field': 'modelId', 'headerName': 'Model ID', 'width': 150 },
+        { 'field': 'totalEarnings', 'headerName': 'Earnings(ETH)', 'width': 150 },
+        { 'field': 'purchaseCount', 'headerName': 'Purchases', 'width': 150 },
+        { 'field': 'predictionCount', 'headerName': 'Predictions', 'width': 150 },
+    ]
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
+    return (
+        <div className={styles.container}>
+            <Head>
+                <title>AlphaSea App</title>
+                <meta name="description" content="AlphaSea is a decentralized marketplace for market alphas." />
+            </Head>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+            <main className={styles.main}>
+                <h1 className={styles.title}>
+                    AlphaSea Leaderboard
+                </h1>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+                <div style={{ height: 400, width: '100%' }}>
+                    <DataGrid
+                        rows={models}
+                        columns={leaderboardColumns}
+                        pageSize={100}
+                        rowsPerPageOptions={[100]}
+                    />
+                </div>
+            </main>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            <footer className={styles.footer}>
+            </footer>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-      </footer>
-    </div>
-  )
+    )
 }
 
 export default Home
