@@ -14,16 +14,18 @@ const Home: NextPage = () => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error: {JSON.stringify(error)}</p>;
     }
-    const models = _.sortBy(queryModelsResult.data.models, (model) => {
+    let models = _.sortBy(queryModelsResult.data.models, (model) => {
         return -model.totalEarnings
     })
-    _.each(models, (model, i) => {
-        model['rank'] = i
+    models = _.map(models, (model, i) => {
+        return _.extend({
+            'rank': i + 1,
+        }, model)
     })
 
     const leaderboardColumns = [
         { 'field': 'rank', 'headerName': 'Rank', 'width': 150 },
-        { 'field': 'modelId', 'headerName': 'Model ID', 'width': 150 },
+        { 'field': 'id', 'headerName': 'Model ID', 'width': 150 },
         { 'field': 'totalEarnings', 'headerName': 'Earnings(ETH)', 'width': 150 },
         { 'field': 'purchaseCount', 'headerName': 'Purchases', 'width': 150 },
         { 'field': 'predictionCount', 'headerName': 'Predictions', 'width': 150 },
