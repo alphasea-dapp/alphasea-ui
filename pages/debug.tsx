@@ -11,7 +11,7 @@ import {
 
 function getColumns(list: Array<Object>) {
     if (list) {
-        return _.map(list[0], (v: Any, k: string) => {
+        return _.map(list[0], (v: any, k: string) => {
             return { field: k, headerName: k }
         })
     } else {
