@@ -1,3 +1,21 @@
+## Development
+
+githubへpushするとnetlifyへ自動でデプロイされる。
+
+### mainnet
+
+[https://app.alphasea.io/](https://app.alphasea.io/)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eb017cca-ae39-4a77-a6dc-d27e0de9d611/deploy-status)](https://app.netlify.com/sites/alphasea-app/deploys)
+
+### testnet (ropsten)
+
+[https://alphasea-app-ropsten.netlify.app/](https://alphasea-app-ropsten.netlify.app/)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6a31ae17-e8f9-4d2e-bf32-14473643eb60/deploy-status)](https://app.netlify.com/sites/alphasea-app-ropsten/deploys)
+
+## About Next.js
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
