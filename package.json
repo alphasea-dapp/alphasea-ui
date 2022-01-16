@@ -14,11 +14,16 @@
     "@mui/material": "^5.2.7",
     "@mui/x-data-grid": "^5.2.1",
     "@types/lodash": "^4.14.178",
+    "bignumber.js": "^9.0.2",
+    "csv-parse": "^5.0.4",
     "graphql": "^16.2.0",
+    "hex-to-array-buffer": "^2.0.0",
     "lodash": "^4.17.21",
     "next": "12.0.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1"
   },
   "devDependencies": {
     "@types/node": "17.0.8",

@@ -6,6 +6,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { QUERY_MODELS } from '../src/graphql/queries/models';
 import {useQuery} from "@apollo/client";
 import _ from 'lodash';
+import {weiToEth} from '../src/utils'
+import NextLink from 'next/link'
 
 const Home: NextPage = () => {
     const queryModelsResult = useQuery(QUERY_MODELS);
@@ -20,13 +22,23 @@ const Home: NextPage = () => {
     models = _.map(models, (model, i) => {
         return _.extend({
             'rank': i + 1,
+            'totalEarningsEth': weiToEth(model['totalEarnings']),
         }, model)
     })
 
     const leaderboardColumns = [
         { 'field': 'rank', 'headerName': 'Rank', 'width': 150 },
-        { 'field': 'id', 'headerName': 'Model ID', 'width': 150 },
-        { 'field': 'totalEarnings', 'headerName': 'Earnings(ETH)', 'width': 150 },
+        {
+            'field': 'id', 'headerName': 'Model ID', 'width': 150,
+            'renderCell': (params) => (
+                <NextLink
+                    href={'/models/' + params.value}
+                >
+                    {params.value}
+                </NextLink>
+            ),
+        },
+        { 'field': 'totalEarningsEth', 'headerName': 'Earnings(ETH)', 'width': 150 },
         { 'field': 'purchaseCount', 'headerName': 'Purchases', 'width': 150 },
         { 'field': 'predictionCount', 'headerName': 'Predictions', 'width': 150 },
     ]

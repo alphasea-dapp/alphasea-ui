@@ -7,6 +7,7 @@ export const QUERY_PREDICTIONS = gql`
         model {
             id
         }
+        executionStartAt
         price
         encryptedContent
         contentKey

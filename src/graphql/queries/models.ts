@@ -20,3 +20,37 @@ export const QUERY_MODELS = gql`
       }
   }
 `;
+
+export const QUERY_MODEL = gql`
+  query queryModel($id: ID!) {
+    models(where: {id: $id}) {
+        id
+        tournament {
+            id
+        }
+        owner
+        predictionLicense
+        createdAt
+        predictions {  
+            id
+            executionStartAt
+            price
+            encryptedContent
+            contentKey
+            createdAt
+            updatedAt
+            
+            purchaseCount
+            shippedPurchaseCount
+            refundedPurchaseCount
+        }
+        
+        totalEarnings
+        predictionCount
+        publishedPredictionCount
+        purchaseCount
+        shippedPurchaseCount
+        refundedPurchaseCount
+    }
+  }
+`;
