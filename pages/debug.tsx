@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import { QUERY_TOURNAMENTS } from '../src/graphql/queries/tournaments';
 import { QUERY_MODELS } from '../src/graphql/queries/models';
+import { QUERY_PREDICTIONS } from '../src/graphql/queries/predictions';
 import { DataGrid } from '@mui/x-data-grid';
 import TextField  from '@mui/material/TextField';
 import _ from 'lodash';
@@ -22,6 +23,7 @@ function getColumns(list: Array<Object>) {
 function Debug({ Component, pageProps }: AppProps) {
     const queryTournamentsResult = useQuery(QUERY_TOURNAMENTS);
     const queryModelsResult = useQuery(QUERY_MODELS);
+    const queryPredictionsResult = useQuery(QUERY_PREDICTIONS);
 
     {
         const { loading, error } = queryTournamentsResult;
@@ -30,6 +32,11 @@ function Debug({ Component, pageProps }: AppProps) {
     }
     {
         const { loading, error } = queryModelsResult;
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error: {JSON.stringify(error)}</p>;
+    }
+    {
+        const { loading, error } = queryPredictionsResult;
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error: {JSON.stringify(error)}</p>;
     }
@@ -73,6 +80,20 @@ function Debug({ Component, pageProps }: AppProps) {
             />
 
             <h2>Prediction</h2>
+            <div style={{ height: 200 }}>
+                <DataGrid
+                    rows={queryPredictionsResult.data.predictions}
+                    columns={getColumns(queryPredictionsResult.data.predictions)}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                />
+            </div>
+            <TextField
+                multiline
+                value={JSON.stringify(queryPredictionsResult.data)}
+                maxRows={4}
+                style={{ width: '100%' }}
+            />
 
             <h2>Purchase</h2>
 
