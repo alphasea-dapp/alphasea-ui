@@ -37,7 +37,7 @@ function Model({ Component, pageProps }: AppProps) {
     }
 
     const model = queryModelResult.data.models[0]
-    let symbols = []
+    let symbols: string[] = []
     let predictions = _.map(model.predictions, (prediction, i) => {
         const decrypted = decryptPrediction(prediction.encryptedContent, prediction.contentKey)
         let rows = []

@@ -30,7 +30,7 @@ const Home: NextPage = () => {
         { 'field': 'rank', 'headerName': 'Rank', 'width': 150 },
         {
             'field': 'id', 'headerName': 'Model ID', 'width': 150,
-            'renderCell': (params) => (
+            'renderCell': (params: any) => (
                 <NextLink
                     href={'/models/' + params.value}
                 >
