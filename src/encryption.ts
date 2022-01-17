@@ -4,6 +4,8 @@ import { encodeUTF8 } from "tweetnacl-util";
 import hexToArrayBuffer from 'hex-to-array-buffer'
 
 export const decryptPrediction = (encryptedContent: string, contentKey: string) => {
+    if (!contentKey) return void 0
+    
     const contentKeyArray = new Uint8Array(hexToArrayBuffer(contentKey.slice(2)));
     const encryptedContentArray = new Uint8Array(hexToArrayBuffer(encryptedContent.slice(2)));
     const nonce = encryptedContentArray.slice(0, secretbox.nonceLength);
