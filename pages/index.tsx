@@ -34,7 +34,7 @@ const Home: NextPage = () => {
                 <NextLink
                     href={'/models/' + params.value}
                 >
-                    {params.value}
+                    {params.value.toUpperCase()}
                 </NextLink>
             ),
         },

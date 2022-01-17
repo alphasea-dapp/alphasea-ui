@@ -24,7 +24,10 @@ function getColumns(list: Array<Object>) {
 
 function Model({ Component, pageProps }: AppProps) {
     const router = useRouter();
-    const { modelId } = router.query;
+    let { modelId } = router.query;
+    if (typeof modelId !== "string") {
+        modelId = ''
+    }
 
     const queryModelResult = useQuery(QUERY_MODEL, {
         variables: { id: modelId },
@@ -78,7 +81,7 @@ function Model({ Component, pageProps }: AppProps) {
 
     return (
         <div>
-            <h1>{modelId}</h1>
+            <h1>{modelId.toUpperCase()}</h1>
 
             <h2>Prediction</h2>
             <div style={{ height: 400 }}>
