@@ -81,7 +81,7 @@ function Model({ Component, pageProps }: AppProps) {
             <h1>{modelId}</h1>
 
             <h2>Prediction</h2>
-            <div style={{ height: 200 }}>
+            <div style={{ height: 400 }}>
                 <DataGrid
                     rows={predictions}
                     columns={predictionColumns}
