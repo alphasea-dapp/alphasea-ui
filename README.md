@@ -2,17 +2,29 @@
 
 githubへpushするとnetlifyへ自動でデプロイされる。
 
-### mainnet
+### mainnet (matic)
 
 [https://app.alphasea.io/](https://app.alphasea.io/)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/eb017cca-ae39-4a77-a6dc-d27e0de9d611/deploy-status)](https://app.netlify.com/sites/alphasea-app/deploys)
 
-### testnet (ropsten)
+### matic testnet (mumbai)
+
+[https://alphasea-app-mumbai.netlify.app/](https://alphasea-app-mumbai.netlify.app/)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/012ca611-625e-4bb3-890d-f0ac01f6ff46/deploy-status)](https://app.netlify.com/sites/alphasea-app-mumbai/deploys)
+
+### eth testnet (ropsten) (deprecated)
 
 [https://alphasea-app-ropsten.netlify.app/](https://alphasea-app-ropsten.netlify.app/)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6a31ae17-e8f9-4d2e-bf32-14473643eb60/deploy-status)](https://app.netlify.com/sites/alphasea-app-ropsten/deploys)
+
+### TODO
+
+- 各モデルのhistorical成績
+- 税金計算用の画面
+- 各モデルの予測表示 (銘柄ごとの購入金額。どの銘柄が需要があるか)
 
 ## About Next.js
 
