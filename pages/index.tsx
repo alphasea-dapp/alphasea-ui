@@ -17,19 +17,25 @@ const Home: NextPage = () => {
         if (error) return <p>Error: {JSON.stringify(error)}</p>;
     }
     let models = _.sortBy(queryModelsResult.data.models, (model) => {
-        return -model.totalEarnings
+        return [
+            -model.totalEarnings,
+            -model.predictionCount,
+            model.id,
+        ]
     })
     models = _.map(models, (model, i) => {
         return _.extend({
             'rank': i + 1,
             'totalEarningsEth': weiToEth(model['totalEarnings']),
+            'tournamentId': model.tournament.id,
         }, model)
     })
 
     const leaderboardColumns = [
-        { 'field': 'rank', 'headerName': 'Rank', 'width': 150 },
+        { 'field': 'rank', 'headerName': 'Rank', 'width': 100 },
+        { 'field': 'tournamentId', 'headerName': 'Tournament', 'width': 150 },
         {
-            'field': 'id', 'headerName': 'Model ID', 'width': 150,
+            'field': 'id', 'headerName': 'Model ID', 'width': 200,
             'renderCell': (params: any) => (
                 <NextLink
                     href={'/models/' + params.value}
@@ -39,8 +45,8 @@ const Home: NextPage = () => {
             ),
         },
         { 'field': 'totalEarningsEth', 'headerName': 'Earnings(ETH)', 'width': 150 },
-        { 'field': 'purchaseCount', 'headerName': 'Purchases', 'width': 150 },
-        { 'field': 'predictionCount', 'headerName': 'Predictions', 'width': 150 },
+        { 'field': 'purchaseCount', 'headerName': 'Purchases', 'width': 100 },
+        { 'field': 'predictionCount', 'headerName': 'Predictions', 'width': 100 },
     ]
 
     return (

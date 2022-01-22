@@ -83,6 +83,8 @@ function Model({ Component, pageProps }: AppProps) {
         <div>
             <h1>{modelId.toUpperCase()}</h1>
 
+            <a href={process.env.NEXT_PUBLIC_ALPHASEA_ETHERSCAN_BASE_URL + '/address/' + model.owner}>{model.owner}</a>
+
             <h2>Prediction</h2>
             <div style={{ height: 400 }}>
                 <DataGrid
