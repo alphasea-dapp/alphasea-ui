@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 
     const leaderboardColumns = [
         { 'field': 'rank', 'headerName': 'Rank', 'width': 100 },
-        { 'field': 'tournamentId', 'headerName': 'Tournament', 'width': 150 },
+        // { 'field': 'tournamentId', 'headerName': 'Tournament', 'width': 150 },
         {
             'field': 'id', 'headerName': 'Model ID', 'width': 200,
             'renderCell': (params: any) => (
@@ -44,7 +44,7 @@ const Home: NextPage = () => {
                 </NextLink>
             ),
         },
-        { 'field': 'totalEarningsEth', 'headerName': 'Earnings(ETH)', 'width': 150 },
+        { 'field': 'totalEarningsEth', 'headerName': 'Earnings(MATIC)', 'width': 150 },
         { 'field': 'purchaseCount', 'headerName': 'Purchases', 'width': 100 },
         { 'field': 'predictionCount', 'headerName': 'Predictions', 'width': 100 },
     ]
@@ -69,6 +69,30 @@ const Home: NextPage = () => {
                         rowsPerPageOptions={[100]}
                     />
                 </div>
+
+                {/*<h2>Statistics</h2>*/}
+
+                {/*<p>Earnings (MATIC): {0}</p>*/}
+                {/*<p>Mean of sharpe: {0}</p>*/}
+                {/*<p>Sharpe of all models ensemble: {0}</p>*/}
+                {/*<p>Sharpe of top model (leak): {0}</p>*/}
+                {/*<p>Sharpe of top 5 models ensemble (leak): {0}</p>*/}
+                {/*<p>Sharpe of top 10 models ensemble (leak): {0}</p>*/}
+                {/*<p>Mean of purchased models sharpe (equal weighted): {0}</p>*/}
+                {/*<p>Mean of purchased models sharpe (count weighted): {0}</p>*/}
+                {/*<p>Mean of purchased models sharpe (earnings weighted): {0}</p>*/}
+
+                {/*<p>meta model</p>*/}
+                {/*<p>Sharpe of purchased models ensemble (equal weighted): {0}</p>*/}
+                {/*<p>Sharpe of purchased models ensemble (count weighted): {0}</p>*/}
+                {/*<p>Sharpe of purchased models ensemble (earnings weighted): {0}</p>*/}
+
+                {/*<p>Last published round return distribution (all vs purchased)</p>*/}
+                {/*<p>Sharpe distribution (all vs purchased)</p>*/}
+
+                {/*<p>notes</p>*/}
+                {/*<p>Sharpe ratio is calculated by last {0} days</p>*/}
+                {/*<p>Leak means that it cannot actually be reproducible.</p>*/}
             </main>
 
             <footer className={styles.footer}>

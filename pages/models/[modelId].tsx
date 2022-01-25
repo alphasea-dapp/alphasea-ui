@@ -68,8 +68,8 @@ function Model({ Component, pageProps }: AppProps) {
 
     const predictionColumns = [
         { 'field': 'executionStartAtStr', 'headerName': 'time', 'width': 200 },
-        { 'field': 'earningsEth', 'headerName': 'earnings (ETH)', 'width': 150 },
-        { 'field': 'priceEth', 'headerName': 'price (ETH)', 'width': 100 },
+        { 'field': 'earningsEth', 'headerName': 'earnings (MATIC)', 'width': 150 },
+        { 'field': 'priceEth', 'headerName': 'price (MATIC)', 'width': 150 },
     ]
     _.each(symbols, (symbol) => {
         predictionColumns.push({
