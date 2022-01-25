@@ -90,8 +90,8 @@ function Model({ Component, pageProps }: AppProps) {
                 <DataGrid
                     rows={predictions}
                     columns={predictionColumns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
+                    pageSize={100}
+                    rowsPerPageOptions={[100]}
                 />
             </div>
 
