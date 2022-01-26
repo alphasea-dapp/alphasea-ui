@@ -3,3 +3,12 @@ command = "yarn build"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
+
+[[headers]]
+  for = "/_next/static/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+[[headers]]
+  for = "/_next/static/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
