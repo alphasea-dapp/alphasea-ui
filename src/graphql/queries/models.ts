@@ -11,12 +11,7 @@ export const QUERY_MODELS = gql`
         predictionLicense
         createdAt
         
-        totalEarnings
         predictionCount
-        publishedPredictionCount
-        purchaseCount
-        shippedPurchaseCount
-        refundedPurchaseCount
       }
   }
 `;
@@ -34,23 +29,14 @@ export const QUERY_MODEL = gql`
         predictions {  
             id
             executionStartAt
-            price
             encryptedContent
-            contentKey
+            predictionKeyPublication {
+                contentKey
+            }
             createdAt
-            updatedAt
-            
-            purchaseCount
-            shippedPurchaseCount
-            refundedPurchaseCount
         }
         
-        totalEarnings
         predictionCount
-        publishedPredictionCount
-        purchaseCount
-        shippedPurchaseCount
-        refundedPurchaseCount
     }
   }
 `;

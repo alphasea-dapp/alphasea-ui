@@ -42,7 +42,7 @@ function Model({ Component, pageProps }: AppProps) {
     const model = queryModelResult.data.models[0]
     let symbols: string[] = []
     let predictions = _.map(model.predictions, (prediction, i) => {
-        const decrypted = decryptPrediction(prediction.encryptedContent, prediction.contentKey)
+        const decrypted = decryptPrediction(prediction.encryptedContent, prediction.predictionKeyPublication.contentKey)
         let rows = []
         if (decrypted) {
             rows = parse(decrypted, {
@@ -52,8 +52,6 @@ function Model({ Component, pageProps }: AppProps) {
         }
         prediction = _.extend({
             'executionStartAtStr': new Date(+prediction['executionStartAt'] * 1000).toISOString(),
-            'earningsEth': weiToEth(prediction['price']).times(prediction['shippedPurchaseCount']),
-            'priceEth': weiToEth(prediction['price']),
         }, prediction)
         _.each(rows, (row) => {
             symbols.push(row.symbol)
@@ -68,8 +66,6 @@ function Model({ Component, pageProps }: AppProps) {
 
     const predictionColumns = [
         { 'field': 'executionStartAtStr', 'headerName': 'time', 'width': 200 },
-        { 'field': 'earningsEth', 'headerName': 'earnings (MATIC)', 'width': 150 },
-        { 'field': 'priceEth', 'headerName': 'price (MATIC)', 'width': 150 },
     ]
     _.each(symbols, (symbol) => {
         predictionColumns.push({

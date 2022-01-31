@@ -18,7 +18,6 @@ const Home: NextPage = () => {
     }
     let models = _.sortBy(queryModelsResult.data.models, (model) => {
         return [
-            -model.totalEarnings,
             -model.predictionCount,
             model.id,
         ]
@@ -26,7 +25,6 @@ const Home: NextPage = () => {
     models = _.map(models, (model, i) => {
         return _.extend({
             'rank': i + 1,
-            'totalEarningsEth': weiToEth(model['totalEarnings']),
             'tournamentId': model.tournament.id,
         }, model)
     })
@@ -44,8 +42,6 @@ const Home: NextPage = () => {
                 </NextLink>
             ),
         },
-        { 'field': 'totalEarningsEth', 'headerName': 'Earnings(MATIC)', 'width': 150 },
-        { 'field': 'purchaseCount', 'headerName': 'Purchases', 'width': 100 },
         { 'field': 'predictionCount', 'headerName': 'Predictions', 'width': 100 },
     ]
 

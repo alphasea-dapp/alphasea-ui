@@ -8,15 +8,11 @@ export const QUERY_PREDICTIONS = gql`
             id
         }
         executionStartAt
-        price
         encryptedContent
-        contentKey
+        predictionKeyPublication {
+            contentKey
+        }
         createdAt
-        updatedAt
-        
-        purchaseCount
-        shippedPurchaseCount
-        refundedPurchaseCount
       }
   }
 `;

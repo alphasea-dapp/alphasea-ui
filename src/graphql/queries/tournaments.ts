@@ -6,8 +6,7 @@ export const QUERY_TOURNAMENTS = gql`
         id
         executionStartAt
         predictionTime
-        purchaseTime
-        shippingTime
+        sendingTime
         executionPreparationTime
         executionTime
         publicationTime
