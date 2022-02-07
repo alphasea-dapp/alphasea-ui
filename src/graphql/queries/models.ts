@@ -30,8 +30,9 @@ export const QUERY_MODEL = gql`
             id
             executionStartAt
             encryptedContent
-            predictionKeyPublication {
+            predictionKey {
                 contentKey
+                sentCount
             }
             createdAt
         }

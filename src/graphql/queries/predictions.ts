@@ -9,8 +9,9 @@ export const QUERY_PREDICTIONS = gql`
         }
         executionStartAt
         encryptedContent
-        predictionKeyPublication {
+        predictionKey {
             contentKey
+            sentCount
         }
         createdAt
       }

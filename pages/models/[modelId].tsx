@@ -42,7 +42,7 @@ function Model({ Component, pageProps }: AppProps) {
     const model = queryModelResult.data.models[0]
     let symbols: string[] = []
     let predictions = _.map(model.predictions, (prediction, i) => {
-        const decrypted = decryptPrediction(prediction.encryptedContent, _.get(prediction, 'predictionKeyPublication.contentKey'))
+        const decrypted = decryptPrediction(prediction.encryptedContent, prediction.predictionKey.contentKey)
         let rows = []
         if (decrypted) {
             rows = parse(decrypted, {
@@ -51,6 +51,7 @@ function Model({ Component, pageProps }: AppProps) {
             });
         }
         prediction = _.extend({
+            'sentCount': +prediction.predictionKey.sentCount,
             'executionStartAtStr': new Date(+prediction['executionStartAt'] * 1000).toISOString(),
         }, prediction)
         _.each(rows, (row) => {
@@ -66,6 +67,7 @@ function Model({ Component, pageProps }: AppProps) {
 
     const predictionColumns = [
         { 'field': 'executionStartAtStr', 'headerName': 'time', 'width': 200 },
+        { 'field': 'sentCount', 'headerName': 'shares', 'width': 80 },
     ]
     _.each(symbols, (symbol) => {
         predictionColumns.push({
